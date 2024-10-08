@@ -1,22 +1,42 @@
-# PDF Extractor :pencil2::bookmark_tabs:
+# Sudoku Solver :game_die:
 
-This is my attempt at a python scipt that accepts user inputted boards as text files, solves them, and outputs to the console.
+These are all my attempts of creating a Python script that accepts user inputted boards as text files, solved them, and outputs to the console.
 
 ## Description
 
-This program, though uncomplete currently works as follows: I have created sudoku text files, there are simply 9 character wide and 9 line tall files representing sudoku boards.  This script has custom objects for each tile that contain a value as well as a list of possible values.  It then parses through the board looking or spaces that have only 1 possible option, or spaces where in its row, column, and 
-ninth it can only be 1 number.  It is incomplete currently as it cannot solve every board, as some reach states where there is no certain next move based on the descriptors I have created.
+This program works as follows, I read in text files, and using both a custom class for sudoku boards and sudoku tiles, I populate my objects with a 2d array of tile objects.  I then start a depth-first search with backtracking, that will brute force the sudoku board, looking at every empty space, and starting top left to bottom right, trying all possible combinations.  I try this, checking the boards validity every new symbol, and once I reach a dead end, we backtrack.  This solution is simple in implementation, but resource intensive, the more zeroes are on the board the longer it will take, especially towards the front since attempts can go for a while before having the backtrack to the start.  
+Previous versions of this program instead looked at the board through a lens closer to that of a real person, analyzing patterns and looking for giveaway cells before marking them.
 
-## Possible future improvements.
+![Screenshot](screenshot.png)
 
-I would like to incorporate depth-first search as I think that may be able to make it solveable for any board, by essentially brute forcing it.
+## Features
 
-## Executing program
+* Will solve and display solution to any sudoku board via brute force.
+* Accepts text files as sudoku board inputs, periods for unmarked squares, numbers for marked ones.
+* Shows time taken to solve any board, as well as before and after solving for reference.
 
-* The board to solve is currently located on line 21, but will eventually be turned into an argument in the command.
+## Getting Started
+
+### Dependencies
+* Python3
+
+
+### Installing
+
+* Make sure that directory script is run from has your input boards.
+
+### Executing program
+
+* Currently run with no command line arguments.
 ```
-python3 sudokusolverattempt2.py
+Python3 sudokuBruteForce.py
 ```
+
+## Future Plans
+
+* There are two major things I would like to change in the future:
+    1) I would like to combine both previous and latest versions into one program that first analyzes the board to see what can immediatly be done to it, then brute forces the rest.
+    2) I would also like to make it more user friendly, adding a simple input menu system allowing for boards to be chosen or even custom entered would be nice.
 
 ## Authors
 
@@ -26,15 +46,19 @@ python3 sudokusolverattempt2.py
 ## Version History
 
 * 0.1
-    * Initial version which only would look for spots where a space can only be 1 number.
+    * Initial version, simply iterated through board and if a spot had only one option it was chosen.
 * 0.2
-* Second version which also checks possible options for row, col, and ninth and marks when there is only 1 space that can be a specific num
+    * Attempting to add some misguided depth-first-search methods, didn't work as intended
+* 0.3
+    * Algorithim gained a little bit of future-sight, now tiles could have possible squares, so if there was multiple options for a tile, but only one tile in row for example could be 3, then it was declared 3.
+* 0.4
+    * MAJOR overhaul, complete depth-first-search brute forcing, added functionality as methods to sudoku board object class.
 
 ## License
 
-This isn't liscened, come on man it's like 14 lines of code.
+© 2024 Anthony Simao
+All rights reserved.
 
 ## Acknowledgments
 
-* [README-Template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
-* [GeeksforGeeks](https://www.geeksforgeeks.org/working-with-pdf-files-in-python/)
+* [GeeksforGeeks](https://www.geeksforgeeks.org)
